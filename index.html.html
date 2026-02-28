@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suraj Parida – Finance Professional</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════
+   RESET & TOKENS
+══════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --cream:    #f7f4ef;
+  --paper:    #ffffff;
+  --ink:      #1a1814;
+  --ink2:     #3d3a34;
+  --mid:      #7a7570;
+  --faint:    #c8c3bb;
+  --rule:     #e8e3db;
+  --gold:     #8a6f3e;
+  --gold-l:   #b8976a;
+  --gold-bg:  #f5ede0;
+  --nav-h:    64px;
+  --ease:     cubic-bezier(.4,0,.2,1);
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ══════════════════════════════════════════
+   NAV
+══════════════════════════════════════════ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  z-index: 100;
+  background: rgba(247,244,239,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6vw;
+}
+
+nav.scrolled { border-color: var(--rule); }
+
+.nav-brand {
+  font-family: 'Fraunces', serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.nav-brand span { color: var(--gold); }
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0; right: 0;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s var(--ease);
+}
+
+.nav-links a:hover { color: var(--ink); }
+.nav-links a:hover::after { transform: scaleX(1); }
+
+.nav-cta {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 8px 18px;
+  text-decoration: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.22s var(--ease);
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-cta:hover {
+  background: var(--gold);
+  color: white;
+}
+
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 6vw;
+  padding-top: var(--nav-h);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative grid lines */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* Large background letter */
+.hero::after {
+  content: 'SP';
+  position: absolute;
+  right: 2vw;
+  bottom: -4vh;
+  font-family: 'Fraunces', serif;
+  font-size: 28vw;
+  font-weight: 600;
+  color: rgba(138,111,62,0.04);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.05em;
+}
+
+.hero-inner {
+  max-width: 900px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.7s var(--ease) 0.1s forwards;
+}
+
+.hero-tag::before {
+  content: '';
+  width: 28px; height: 1px;
+  background: var(--gold);
+}
+
+.hero-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(3.6rem, 9vw, 7.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.7s var(--ease) 0.25s forwards;
+}
+
+.hero-name em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero-desc {
+  max-width: 520px;
+  font-size: 1rem;
+  color: var(--mid);
+  line-height: 1.8;
+  margin-bottom: 44px;
+  font-weight: 300;
+  opacity: 0;
+  animation: fadeUp 0.7s var(--ease) 0.4s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.7s var(--ease) 0.55s forwards;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: white;
+  background: var(--ink);
+  padding: 14px 28px;
+  text-decoration: none;
+  transition: all 0.22s var(--ease);
+}
+
+.btn-primary:hover {
+  background: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(138,111,62,0.25);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  border: 1px solid var(--faint);
+  padding: 14px 28px;
+  text-decoration: none;
+  transition: all 0.22s var(--ease);
+}
+
+.btn-secondary:hover {
+  border-color: var(--ink);
+  transform: translateY(-2px);
+}
+
+.hero-stats {
+  position: absolute;
+  bottom: 48px;
+  right: 6vw;
+  display: flex;
+  gap: 40px;
+  opacity: 0;
+  animation: fadeUp 0.7s var(--ease) 0.7s forwards;
+}
+
+.stat { text-align: right; }
+
+.stat-num {
+  font-family: 'Fraunces', serif;
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-top: 4px;
+}
+
+/* ══════════════════════════════════════════
+   SECTIONS COMMON
+══════════════════════════════════════════ */
+section {
+  padding: 100px 6vw;
+}
+
+section:nth-child(even) { background: var(--paper); }
+
+.section-inner { max-width: 1000px; margin: 0 auto; }
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  margin-bottom: 60px;
+}
+
+.section-num {
+  font-family: 'Fraunces', serif;
+  font-size: 0.75rem;
+  color: var(--gold);
+  font-weight: 400;
+}
+
+.section-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.section-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ══════════════════════════════════════════
+   ABOUT
+══════════════════════════════════════════ */
+#about .about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.about-text {
+  font-size: 1.05rem;
+  color: var(--ink2);
+  line-height: 1.9;
+  font-weight: 300;
+}
+
+.about-text p + p { margin-top: 20px; }
+
+.about-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.highlight-card {
+  background: var(--cream);
+  border: 1px solid var(--rule);
+  padding: 20px 22px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.highlight-card:hover {
+  border-color: var(--gold-l);
+  transform: translateX(4px);
+}
+
+.highlight-icon {
+  width: 36px; height: 36px;
+  background: var(--gold-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
+.highlight-info strong {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+
+.highlight-info span {
+  font-size: 0.78rem;
+  color: var(--mid);
+}
+
+/* ══════════════════════════════════════════
+   EXPERIENCE
+══════════════════════════════════════════ */
+#experience .exp-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 40px;
+  padding: 44px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+#experience .exp-item:first-of-type { border-top: 1px solid var(--rule); }
+
+.exp-left { padding-top: 4px; }
+
+.exp-date {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.exp-company {
+  font-size: 0.82rem;
+  color: var(--mid);
+  line-height: 1.5;
+}
+
+.exp-right {}
+
+.exp-role {
+  font-family: 'Fraunces', serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+.exp-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.exp-bullets li {
+  display: flex;
+  gap: 12px;
+  font-size: 0.88rem;
+  color: var(--mid);
+  line-height: 1.7;
+}
+
+.exp-bullets li::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--gold-l);
+  flex-shrink: 0;
+  margin-top: 9px;
+}
+
+/* ══════════════════════════════════════════
+   EDUCATION
+══════════════════════════════════════════ */
+#education .edu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.edu-card {
+  background: var(--cream);
+  border: 1px solid var(--rule);
+  padding: 32px 30px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease);
+}
+
+.edu-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 0;
+  background: var(--gold);
+  transition: height 0.35s var(--ease);
+}
+
+.edu-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.07); }
+.edu-card:hover::before { height: 100%; }
+
+.edu-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: var(--gold-bg);
+  padding: 4px 10px;
+  margin-bottom: 16px;
+}
+
+.edu-degree {
+  font-family: 'Fraunces', serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.edu-school {
+  font-size: 0.82rem;
+  color: var(--mid);
+  margin-bottom: 4px;
+}
+
+.edu-year {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--faint);
+  letter-spacing: 0.06em;
+}
+
+/* ══════════════════════════════════════════
+   SKILLS
+══════════════════════════════════════════ */
+#skills .skills-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+.skills-group-title {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.skill-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  font-size: 0.8rem;
+  font-weight: 400;
+  padding: 7px 16px;
+  border: 1px solid var(--rule);
+  color: var(--ink2);
+  background: var(--paper);
+  transition: all 0.2s;
+  cursor: default;
+}
+
+.pill:hover {
+  background: var(--gold-bg);
+  border-color: var(--gold-l);
+  color: var(--gold);
+}
+
+/* ══════════════════════════════════════════
+   PROJECTS
+══════════════════════════════════════════ */
+#projects .proj-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.proj-card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 32px;
+  position: relative;
+  transition: all 0.25s var(--ease);
+}
+
+.proj-card:hover {
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  transform: translateY(-4px);
+}
+
+.proj-num {
+  font-family: 'Fraunces', serif;
+  font-size: 3rem;
+  font-weight: 300;
+  color: var(--rule);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.proj-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+
+.proj-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.proj-items li {
+  font-size: 0.83rem;
+  color: var(--mid);
+  padding-left: 14px;
+  position: relative;
+  line-height: 1.6;
+}
+
+.proj-items li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--gold-l);
+}
+
+/* ══════════════════════════════════════════
+   CONTACT
+══════════════════════════════════════════ */
+#contact {
+  background: var(--ink) !important;
+}
+
+#contact .section-title { color: var(--cream); }
+#contact .section-num { color: var(--gold-l); }
+#contact .section-rule { background: rgba(255,255,255,0.1); }
+
+.contact-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.contact-headline {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+
+.contact-headline em {
+  font-style: italic;
+  color: var(--gold-l);
+}
+
+.contact-sub {
+  font-size: 0.92rem;
+  color: rgba(247,244,239,0.5);
+  line-height: 1.8;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 22px;
+  border: 1px solid rgba(255,255,255,0.08);
+  text-decoration: none;
+  color: var(--cream);
+  transition: all 0.22s var(--ease);
+  background: rgba(255,255,255,0.03);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-link::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--gold-l);
+  transform: scaleY(0);
+  transition: transform 0.22s var(--ease);
+}
+
+.contact-link:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.15);
+}
+
+.contact-link:hover::before { transform: scaleY(1); }
+
+.contact-link-icon {
+  width: 38px; height: 38px;
+  background: rgba(138,111,62,0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-link-icon svg { width: 16px; height: 16px; }
+
+.contact-link-info strong {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(247,244,239,0.45);
+  margin-bottom: 2px;
+}
+
+.contact-link-info span {
+  font-size: 0.9rem;
+  color: var(--cream);
+}
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+footer {
+  background: var(--ink);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 24px 6vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-name {
+  font-family: 'Fraunces', serif;
+  font-size: 0.9rem;
+  color: rgba(247,244,239,0.3);
+}
+
+.footer-copy {
+  font-size: 0.72rem;
+  color: rgba(247,244,239,0.2);
+  letter-spacing: 0.06em;
+}
+
+/* ══════════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   PRINT / PDF STYLES
+══════════════════════════════════════════ */
+@media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  nav, .hero-stats, .btn-secondary, footer { display: none !important; }
+
+  body { background: white; color: #1a1814; font-size: 11px; }
+
+  .hero {
+    min-height: auto;
+    padding: 20px 32px 24px;
+    background: #1a1814 !important;
+    display: block;
+  }
+
+  .hero::before, .hero::after { display: none; }
+
+  .hero-name {
+    font-size: 3.2rem;
+    opacity: 1 !important;
+    animation: none !important;
+  }
+
+  .hero-tag, .hero-desc, .hero-actions {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+
+  .btn-primary { display: none !important; }
+
+  section { padding: 20px 32px; break-inside: avoid; }
+  section:nth-child(even) { background: #fafafa !important; }
+
+  .reveal { opacity: 1 !important; transform: none !important; }
+
+  .section-title { font-size: 1.4rem; }
+
+  #about .about-grid,
+  #education .edu-grid,
+  #skills .skills-layout,
+  #projects .proj-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  #experience .exp-item { grid-template-columns: 140px 1fr; gap: 20px; padding: 20px 0; }
+
+  .contact-inner { grid-template-columns: 1fr 1fr; }
+
+  #contact {
+    background: #1a1814 !important;
+    padding: 24px 32px;
+  }
+
+  .edu-card, .proj-card, .highlight-card { break-inside: avoid; }
+
+  .pill {
+    background: #f5ede0 !important;
+    border-color: #c8c3bb !important;
+    padding: 4px 10px;
+  }
+
+  .contact-link { border-color: rgba(255,255,255,0.15) !important; }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  #about .about-grid,
+  #education .edu-grid,
+  #skills .skills-layout,
+  #projects .proj-grid,
+  .contact-inner { grid-template-columns: 1fr; gap: 32px; }
+  #experience .exp-item { grid-template-columns: 1fr; gap: 12px; }
+  .hero-stats { position: static; margin-top: 40px; flex-wrap: wrap; gap: 24px; }
+  section { padding: 70px 6vw; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav id="navbar">
+  <div class="nav-brand">Suraj <span>Parida</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+  </ul>
+  <button class="nav-cta" onclick="downloadCV()">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:6px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Download CV
+  </button>
+
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-tag">Finance Professional · ACCA Candidate</div>
+    <h1 class="hero-name">Suraj<br><em>Parida</em></h1>
+    <p class="hero-desc">
+      B.Com (Hons.) graduate from Delhi University with hands-on experience in financial accounting, GST compliance, accounts payable/receivable, and auditing. Currently pursuing ACCA at Skill Level.
+    </p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#contact">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Get In Touch
+      </a>
+      <a class="btn-secondary" href="#experience">
+        View Experience →
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">3+</div>
+      <div class="stat-label">Months Internship</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">ACCA</div>
+      <div class="stat-label">Skill Level</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">B.Com</div>
+      <div class="stat-label">Hons. Delhi Uni</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-num">01</span>
+      <h2 class="section-title">About Me</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal reveal-delay-1">
+        <p>I am a motivated and detail-oriented finance professional with a B.Com (Hons.) degree from the University of Delhi and an ongoing ACCA qualification at Skill Level. My academic journey gave me a rigorous grounding in financial accounting, auditing, management reporting, and IFRS standards.</p>
+        <p>Beyond academics, I gained hands-on internship experience at SNRG Electricals India Pvt. Ltd., where I was directly involved in accounts payable, receivable, GST compliance, bank reconciliation, and financial reporting — tasks that gave me real-world insight into how finance functions in a business environment.</p>
+        <p>I am driven by a passion for numbers, a commitment to accuracy, and a desire to contribute meaningfully to financial decision-making.</p>
+      </div>
+      <div class="about-highlights reveal reveal-delay-2">
+        <div class="highlight-card">
+          <div class="highlight-icon">🎓</div>
+          <div class="highlight-info">
+            <strong>B.Com (Hons.) Graduate</strong>
+            <span>University of Delhi · 2021–2024</span>
+          </div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">📊</div>
+          <div class="highlight-info">
+            <strong>ACCA – Skill Level</strong>
+            <span>In Progress · 2025–2027</span>
+          </div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">🏢</div>
+          <div class="highlight-info">
+            <strong>Finance Intern</strong>
+            <span>SNRG Electricals · Nov 2025–Feb 2026</span>
+          </div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">📍</div>
+          <div class="highlight-info">
+            <strong>New Delhi, India</strong>
+            <span>Open to opportunities</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EXPERIENCE ══ -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Experience</h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="exp-item reveal reveal-delay-1">
+      <div class="exp-left">
+        <div class="exp-date">Nov 2025 – Feb 2026</div>
+        <div class="exp-company">SNRG Electricals<br>India Pvt. Ltd.<br><br>New Delhi, India</div>
+      </div>
+      <div class="exp-right">
+        <h3 class="exp-role">Intern – Accounts</h3>
+        <ul class="exp-bullets">
+          <li>Handled accounts payable and receivable functions, including end-to-end processing of purchase and sales invoices</li>
+          <li>Managed GST compliance tasks and supported the timely filing of tax-related entries to ensure regulatory adherence</li>
+          <li>Performed bank statement reconciliation and ledger reconciliation to maintain accuracy of financial records</li>
+          <li>Assisted in the preparation of financial reports and maintained organized documentation of all accounting entries</li>
+          <li>Demonstrated strong adaptability, keen interest in learning, and consistent commitment to assigned responsibilities</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EDUCATION ══ -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Education</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card reveal reveal-delay-1">
+        <span class="edu-badge">Undergraduate</span>
+        <div class="edu-degree">B.Com (Hons.) in Accounting &amp; Finance</div>
+        <div class="edu-school">University of Delhi · Delhi, India</div>
+        <div class="edu-year">Dec 2021 – Jul 2024</div>
+      </div>
+      <div class="edu-card reveal reveal-delay-2">
+        <span class="edu-badge">Professional · In Progress</span>
+        <div class="edu-degree">ACCA Qualification – Skill Level</div>
+        <div class="edu-school">Association of Chartered Certified Accountants · Global</div>
+        <div class="edu-year">Mar 2025 – Mar 2027</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SKILLS ══ -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Skills</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="skills-layout">
+      <div class="reveal reveal-delay-1">
+        <div class="skills-group-title">Finance &amp; Accounting</div>
+        <div class="skill-pills">
+          <span class="pill">Financial Accounting</span>
+          <span class="pill">IFRS</span>
+          <span class="pill">GAAP</span>
+          <span class="pill">Internal Audit</span>
+          <span class="pill">Variance Analysis</span>
+          <span class="pill">GST Compliance</span>
+          <span class="pill">Accounts Payable</span>
+          <span class="pill">Accounts Receivable</span>
+          <span class="pill">Bank Reconciliation</span>
+          <span class="pill">Bookkeeping</span>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="skills-group-title">Tools &amp; Software</div>
+        <div class="skill-pills">
+          <span class="pill">Microsoft Excel</span>
+          <span class="pill">Pivot Tables</span>
+          <span class="pill">VLOOKUP</span>
+          <span class="pill">Financial Modelling</span>
+          <span class="pill">Microsoft Word</span>
+          <span class="pill">Microsoft PowerPoint</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROJECTS ══ -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Projects</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="proj-grid">
+      <div class="proj-card reveal reveal-delay-1">
+        <div class="proj-num">01</div>
+        <div class="proj-title">ACCA Skill-Level Projects</div>
+        <ul class="proj-items">
+          <li>Analyzed financial reports of multinational firms to evaluate compliance with IFRS and audit standards</li>
+          <li>Conducted variance analysis and cash flow assessments to identify cost optimization opportunities</li>
+        </ul>
+      </div>
+      <div class="proj-card reveal reveal-delay-2">
+        <div class="proj-num">02</div>
+        <div class="proj-title">University Coursework Projects</div>
+        <ul class="proj-items">
+          <li>Prepared and presented a comparative financial analysis of listed Indian companies using ratio analysis and trend evaluation</li>
+          <li>Designed an internal control checklist to strengthen audit procedures in small-scale organizations</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-num">06</span>
+      <h2 class="section-title">Contact</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="contact-inner">
+      <div class="reveal reveal-delay-1">
+        <h3 class="contact-headline">Let's work<br><em>together</em></h3>
+        <p class="contact-sub">Open to full-time roles, internships, and finance opportunities in accounting, audit, or financial analysis. Based in New Delhi — available to connect.</p>
+      </div>
+      <div class="contact-links reveal reveal-delay-2">
+        <a class="contact-link" href="tel:+917982616168">
+          <div class="contact-link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#b8976a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.4a16 16 0 0 0 6 6l.96-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div class="contact-link-info">
+            <strong>Phone</strong>
+            <span>+91 79826 16168</span>
+          </div>
+        </a>
+        <a class="contact-link" href="/cdn-cgi/l/email-protection#c6b5b3b4a7acb6a7b4afa2a7f0f4f3f586a1aba7afaae8a5a9ab">
+          <div class="contact-link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#b8976a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div class="contact-link-info">
+            <strong>Email</strong>
+            <span><span class="__cf_email__" data-cfemail="54272126353e2435263d303562666167143339353d387a373b39">[email&#160;protected]</span></span>
+          </div>
+        </a>
+        <a class="contact-link" href="https://linkedin.com/in/suraj-parida-a3b0501b0" target="_blank" rel="noopener">
+          <div class="contact-link-icon">
+            <svg viewBox="0 0 24 24" fill="#b8976a"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div class="contact-link-info">
+            <strong>LinkedIn</strong>
+            <span>linkedin.com/in/suraj-parida</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-name">Suraj Parida</div>
+  <div class="footer-copy">Finance Professional · New Delhi, India</div>
+</footer>
+
+<script>
+  const nav = document.getElementById("navbar");
+  window.addEventListener("scroll", () => {
+    nav.classList.toggle("scrolled", window.scrollY > 20);
+  });
+
+  const reveals = document.querySelectorAll(".reveal");
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add("visible");
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  function downloadCV() {
+    const btn = document.querySelector(".nav-cta");
+    const orig = btn.innerHTML;
+    btn.textContent = "Preparing…";
+    btn.disabled = true;
+    document.querySelectorAll(".reveal").forEach(el => el.classList.add("visible"));
+    setTimeout(() => {
+      window.print();
+      btn.innerHTML = orig;
+      btn.disabled = false;
+    }, 300);
+  }
+</script>
+</body>
+</html>
